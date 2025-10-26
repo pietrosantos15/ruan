@@ -1,0 +1,616 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Montserrat:wght@400;700;900&display=swap');
+
+:root {
+    /* Cores NextGuard: Preto e Amarelo */
+    --cor-primaria: #000000; /* Preto Puro (Fundo Principal) */
+    --cor-secundaria: #FFC300; /* Amarelo Vibrante (Destaque/Ação) */
+    --cor-branca: #f5f5f5; /* Texto Principal */
+    --cor-cinza: #b0b0b0; /* Texto Secundário */
+    --cor-cinza-escuro: #1a1a1a; /* Detalhes Escuros/Background Secundário */
+
+    --fonte-principal: 'Montserrat', sans-serif;
+    --fonte-secundaria: 'Roboto', sans-serif;
+
+    --tamanho-fonte-h1: 3.1rem;
+    --tamanho-fonte-h2: 2rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fonte-secundaria);
+}
+
+body {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branca);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+/* CONTAINER CENTRALIZADOR GERAL (para conteúdo interno de seções) */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* -------------------- GERAIS E BOTÕES -------------------- */
+.botao, .botao-form {
+    padding: 1rem 2rem;
+    border-radius: 4px; 
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+}
+
+.botao, .botao-form {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+}
+
+.botao:hover, .botao-form:hover {
+    background-color: #FFD700; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* -------------------- HEADER (FULL-WIDTH) -------------------- */
+
+header {
+    background-color: var(--cor-primaria);
+    width: 100%; /* LARGURA TOTAL GARANTIDA */
+    border-bottom: 5px solid var(--cor-secundaria); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* NOVO: WRAPPER INTERNO PARA CENTRALIZAR O CONTEÚDO */
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o conteúdo */
+    padding: 1.5rem 2rem; /* Adiciona o padding lateral e vertical */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nome {
+    font-family: var(--fonte-principal);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--cor-secundaria);
+}
+
+header nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+header nav a {
+    color: var(--cor-branca);
+    font-weight: 500;
+    padding: 5px 0;
+}
+
+header nav a:hover {
+    color: var(--cor-secundaria);
+}
+/* ----------------------------------------------------------- */
+
+/* -------------------- SECTION 1 (HOME/HERO) -------------------- */
+.section1 {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column; /* Altera para que a imagem e o texto fiquem em coluna */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    /* REMOVIDO: background: url('Imagem 1.png') center/cover no-repeat; */
+    background-color: var(--cor-primaria); /* Fundo preto puro */
+    background-blend-mode: normal; 
+    padding: 20px;
+}
+
+/* NOVO: ESTILO PARA A IMAGEM DO ESCUDO */
+.hero-image {
+    width: 100%;
+    max-width: 250px; /* Tamanho razoável para a imagem do escudo */
+    height: auto;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 0 10px rgba(255, 195, 0, 0.5)); /* Efeito de brilho amarelo */
+}
+
+.texto {
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+.texto h1 {
+    font-family: var(--fonte-principal);
+    font-size: var(--tamanho-fonte-h1);
+    font-weight: 900;
+    margin-bottom: 25px;
+    color: var(--cor-branca);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+.texto p {
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 50px;
+    color: var(--cor-cinza);
+}
+
+/* -------------------- SECTION QUEM SOMOS -------------------- */
+.section-quem-somos {
+    background: var(--cor-cinza-escuro);
+    padding: 80px 20px;
+    border-top: 5px solid var(--cor-secundaria);
+}
+.section-quem-somos h2 {
+    font-family: var(--fonte-principal);
+    font-weight: 700;
+    text-align: center;
+    color: var(--cor-secundaria);
+    margin-bottom: 40px;
+    font-size: var(--tamanho-fonte-h2);
+}
+.quem-somos-content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    text-align: left;
+    max-width: 1200px;
+    margin: 40px auto 0;
+}
+.quem-somos-texto {
+    flex: 2;
+}
+.quem-somos-texto p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: var(--cor-cinza);
+}
+.quem-somos-imagem {
+    flex: 1;
+    max-width: 300px;
+    border: 5px solid var(--cor-secundaria);
+    box-shadow: 0 0 15px rgba(255, 195, 0, 0.4);
+}
+.quem-somos-imagem img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+.valores-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+.valores-list li {
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--cor-branca);
+}
+
+/* -------------------- SECTION 4 (SERVIÇOS) -------------------- */
+.section4 {
+    background: var(--cor-primaria);
+    padding: 80px 20px;
+    text-align: center;
+}
+.section4 h2 {
+    font-family: var(--fonte-principal);
+    font-weight: 700;
+    color: var(--cor-secundaria);
+    margin-bottom: 40px;
+    font-size: var(--tamanho-fonte-h2);
+}
+.container-servicos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin: 40px auto;
+    max-width: 1200px;
+}
+.divs4 {
+    background: var(--cor-cinza-escuro);
+    padding: 35px;
+    border-radius: 6px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    border-top: 5px solid var(--cor-cinza-escuro);
+    transition: border-top-color 0.3s, transform 0.3s;
+    text-align: left;
+}
+.divs4:hover {
+    border-top-color: var(--cor-secundaria);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+.divs4 h3 { /* Títulos dos serviços */
+    font-size: 1.4rem; 
+    font-weight: 700; 
+    color: var(--cor-secundaria);
+    margin-bottom: 15px;
+}
+.divs4 p { 
+    font-size: 1rem; 
+    font-weight: 300; 
+    color: var(--cor-cinza);
+}
+
+
+/* -------------------- SECTION 3 (PROJETOS/BANNER) -------------------- */
+.section3 {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+}
+.section3 img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.4); 
+}
+.projeto-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    color: var(--cor-branca);
+    max-width: 700px;
+}
+.projeto-info h2 {
+    font-family: var(--fonte-principal);
+    color: var(--cor-secundaria);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+.projeto-info p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+
+/* -------------------- DEPOIMENTOS -------------------- */
+.depoimentos {
+    padding: 100px 0;
+    background: url('Imagem 3.jpg') center/cover no-repeat fixed; 
+    position: relative; 
+}
+
+.depoimentos::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); 
+    z-index: 0;
+}
+
+.depoimentos h2 {
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    font-family: var(--fonte-principal);
+    font-size: 2rem;
+    margin-bottom: 4rem;
+    color: var(--cor-secundaria);
+}
+.depoimentos-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    background-color: var(--cor-cinza-escuro); 
+    padding: 5rem;
+    border-radius: 8px;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 2px solid var(--cor-secundaria); 
+    box-shadow: 0 0 20px rgba(255, 195, 0, 0.2);
+}
+.depoimentos-autor-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--cor-secundaria);
+}
+.mensagem {
+    font-size: 1.3rem;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: var(--cor-branca);
+}
+.autor {
+    font-weight: 700;
+    color: var(--cor-cinza);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+.rating {
+    font-size: 2rem;
+    color: var(--cor-secundaria);
+}
+
+
+/* -------------------- SECTION 6 (CONTATO / FORM) -------------------- */
+.section6 {
+    background: var(--cor-cinza-escuro);
+    padding: 80px 20px;
+    text-align: center;
+    border-top: 5px solid var(--cor-secundaria);
+}
+.texto6 h2 { font-family: var(--fonte-principal); font-size: 2.5rem; margin-bottom: 10px; color: var(--cor-secundaria); }
+.texto6 h3 { font-size: 1.4rem; font-weight: 500; margin-bottom: 25px; color: var(--cor-branca); }
+.texto6 p { font-size: 1.1rem; font-weight: 300; max-width: 600px; margin: 0 auto 30px; line-height: 1.6; }
+.texto6 .info { font-size: 1rem; color: var(--cor-cinza); margin-top: 20px; }
+
+.formulario {
+    background: var(--cor-primaria);
+    color: var(--cor-branca);
+    max-width: 450px;
+    margin: 40px auto 0;
+    padding: 35px;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 0 15px rgba(255, 195, 0, 0.4); 
+    border: 1px solid var(--cor-cinza-escuro);
+}
+.formulario label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--cor-secundaria);
+}
+.formulario input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #555;
+    background: var(--cor-cinza-escuro); 
+    color: var(--cor-branca);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+
+/* -------------------- RODAPÉ -------------------- */
+.footer {
+    background: var(--cor-primaria);
+    color: var(--cor-cinza);
+    padding: 30px 20px;
+    font-size: 0.9rem;
+    border-top: 5px solid var(--cor-secundaria);
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto 15px;
+    border-bottom: 1px solid var(--cor-cinza-escuro);
+    padding-bottom: 15px;
+}
+.footer-content p {
+    margin-bottom: 8px;
+}
+.redes-sociais a {
+    color: var(--cor-secundaria);
+    margin: 0 10px;
+}
+.copyright {
+    color: #555;
+    font-size: 0.8rem;
+}
+
+
+/* -------------------- RESPONSIVIDADE -------------------- */
+
+@media (min-width: 768px) {
+    .container-servicos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .container-servicos {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 767px) {
+    .hero-image {
+        max-width: 150px; /* Ajuste para mobile */
+    }
+    .header-content {
+        flex-direction: row; /* Mantém logo e menu-toggle na mesma linha */
+        flex-wrap: wrap; 
+        justify-content: space-between;
+    }
+    header .nav {
+        width: 100%;
+        order: 3; /* Move a navegação para baixo */
+        display: none; /* Esconde por padrão */
+        flex-direction: column;
+        gap: 0;
+        margin-top: 10px;
+    }
+    header .nav.active {
+        display: flex; /* Mostra quando o JS ativa a classe 'active' */
+    }
+    header .nav .item, header .nav .botao {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        border-top: 1px solid var(--cor-cinza-escuro);
+    }
+    .texto h1 { font-size: 2.5rem; }
+    .quem-somos-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .quem-somos-imagem {
+        order: -1; 
+        margin-bottom: 30px;
+    }
+    .quem-somos-texto {
+        text-align: center;
+    }
+    .depoimentos-content {
+        flex-direction: column;
+        padding: 30px;
+        text-align: center;
+    }
+    .depoimentos-status {
+        justify-content: center;
+    }
+    .projeto-info h2 { font-size: 1.8rem; }
+    .projeto-info p { font-size: 1rem; }
+}
+
+/* -------------------- CARROSSEL DE EQUIPE -------------------- */
+
+/* Garante que o texto fique ao lado do carrossel e centraliza a imagem */
+.quem-somos-content {
+    align-items: flex-start; 
+}
+
+.quem-somos-texto {
+    flex: 2;
+    padding-right: 40px; 
+}
+
+.team-carousel-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    position: relative;
+    margin: 0 auto; 
+}
+
+.team-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 0 10px; 
+}
+
+.team-member {
+    display: none; 
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    left: 0;
+    top: 0;
+}
+
+.team-member.active-member {
+    display: block; 
+    opacity: 1;
+    position: static;
+}
+
+.quem-somos-imagem {
+    max-width: 200px;
+    margin: 0 auto 15px;
+    border: 5px solid var(--cor-secundaria);
+    box-shadow: 0 0 15px rgba(255, 195, 0, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.quem-somos-imagem img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    height: auto;
+}
+
+.team-info h3 {
+    font-family: var(--fonte-principal);
+    color: var(--cor-branca);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.team-info p {
+    color: var(--cor-secundaria);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+
+/* Botões de Navegação (Setas) */
+.arrow-btn {
+    background: var(--cor-cinza-escuro);
+    color: var(--cor-secundaria);
+    border: 2px solid var(--cor-secundaria);
+    font-size: 1.5rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 20;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+    line-height: 1; 
+}
+
+.arrow-btn:hover {
+    background: var(--cor-secundaria);
+    color: var(--cor-primaria);
+}
+
+.prev-btn {
+    left: 0;
+}
+
+.next-btn {
+    right: 0;
+}
+
+
+/* Responsividade para o carrossel */
+@media (max-width: 767px) {
+    .quem-somos-content {
+        flex-direction: column;
+    }
+    .quem-somos-texto {
+        padding-right: 0;
+        margin-bottom: 30px;
+    }
+    .team-carousel-wrapper {
+        order: -1; 
+        margin-bottom: 30px;
+    }
+    .arrow-btn {
+        padding: 5px 10px;
+        font-size: 1.2rem;
+    }
+}
