@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>NextGuard | Negociação e Preços</title>
+    <style>
+        /* Estilos específicos para a página de Negociação */
+        .negociacao-page {
+            min-height: 100vh;
+            background-color: var(--cor-primaria);
+            padding-top: 50px; 
+            padding-bottom: 50px;
+        }
+
+        .negociacao-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--cor-secundaria);
+            margin-bottom: 40px;
+        }
+
+        .negociacao-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .servicos-negociacao {
+            flex: 2;
+            background: var(--cor-cinza-escuro);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(255, 195, 0, 0.2);
+        }
+
+        .servicos-negociacao h2, .servicos-negociacao h3 {
+            font-family: var(--fonte-principal);
+            color: var(--cor-secundaria);
+            margin-bottom: 20px;
+        }
+        
+        .servicos-negociacao h3 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+        }
+
+        .servico-item {
+            font-size: 1.2rem;
+            color: var(--cor-branca);
+            padding: 15px 0;
+            border-bottom: 1px dashed var(--cor-cinza);
+        }
+        
+        .servico-item:last-of-type {
+            border-bottom: none;
+        }
+
+        .contato-info {
+            margin-top: 40px;
+            text-align: center;
+            border-top: 1px solid var(--cor-cinza-escuro);
+            padding-top: 20px;
+        }
+        .contato-info p {
+            color: var(--cor-cinza);
+            margin-bottom: 10px;
+        }
+
+        /* Área de Preços (à direita) */
+        .precos-box {
+            flex: 1;
+            background: var(--cor-cinza-escuro);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--cor-secundaria);
+            height: fit-content;
+        }
+
+        .precos-box h2 {
+            font-family: var(--fonte-principal);
+            color: var(--cor-secundaria);
+            margin-bottom: 25px;
+        }
+        
+        .precos-box p {
+            font-size: 1rem;
+            color: var(--cor-cinza);
+            margin-bottom: 15px;
+        }
+
+        .precos-box label {
+            display: block;
+            text-align: left;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            color: var(--cor-branca);
+            font-weight: 500;
+        }
+
+        .precos-box input[type="number"],
+        .precos-box input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            background: var(--cor-primaria);
+            color: var(--cor-branca);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 850px) {
+            .negociacao-content {
+                flex-direction: column;
+            }
+            .precos-box {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="negociacao-page">
+        <header class="negociacao-header">
+            <h1 class="nome">NEXTGUARD</h1>
+            <a href="index.html#home" class="botao">Voltar</a>
+        </header>
+        
+        <div class="negociacao-content">
+            <div class="servicos-negociacao">
+                <h2>Nossos Serviços</h2>
+                
+                <h3>Preço da reforma</h3>
+                <div class="servico-item">Reforço Estrutural Tático (Muros, Portões, etc.)</div>
+                <div class="servico-item">Iluminação Tática de Segurança</div>
+                
+                <h3>Automatização da empresa</h3>
+                <div class="servico-item">Instalação de Câmeras e Alarmes</div>
+                <div class="servico-item">Controle de Acesso Eletrônico (Biometria, Catracas)</div>
+                <div class="servico-item">Monitoramento Remoto 24/7</div>
+
+                <div class="contato-info">
+                    <p>Deseja fazer uma negociação à parte? Entre em contato conosco:</p>
+                    <p>
+                        📧 E-mail: <a href="mailto:nextguard@gmail.com" style="color: var(--cor-secundaria);">nextguard@gmail.com</a><br>
+                        📞 Telefone: (14) 99695-0065 (WhatsApp)
+                    </p>
+                </div>
+            </div>
+
+            <div class="precos-box">
+                <h2>Preços</h2>
+                <p>Valor por 5m²: R$ 100,00 (para o serviço base de reforma)</p>
+                
+                <form onsubmit="event.preventDefault()">
+                    <label for="quantia">Área Necessitada (m²):</label>
+                    <input type="number" id="quantia" placeholder="Ex: 50" min="0" step="any" required>
+                    
+                    <label for="valor-estimado">Valor Estimado (R$):</label>
+                    <input type="text" id="valor-estimado" placeholder="Aguardando área..." readonly>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputArea = document.getElementById('quantia');
+            const outputValor = document.getElementById('valor-estimado');
+            const pricePerUnit = 100; // R$ 100,00
+            const unitSize = 5;      // 5 m²
+
+            function calculateEstimate() {
+                // Obtém o valor e tenta convertê-lo para um número decimal
+                const area = parseFloat(inputArea.value.replace(',', '.'));
+                
+                if (isNaN(area) || area <= 0) {
+                    outputValor.value = 'Insira uma área válida (> 0)';
+                    return;
+                }
+
+                // Fórmula: (Area / 5) * 100
+                const estimatedValue = (area / unitSize) * pricePerUnit;
+                
+                // Formata o valor para moeda brasileira (R$ com 2 casas decimais)
+                outputValor.value = 'R$ ' + estimatedValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            // Adiciona o listener para calcular a cada alteração no campo de área
+            inputArea.addEventListener('input', calculateEstimate);
+        });
+    </script>
+</body>
+</html>
