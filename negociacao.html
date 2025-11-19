@@ -26,7 +26,7 @@
         }
 
         .negociacao-content {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             gap: 40px;
@@ -52,15 +52,41 @@
             margin-top: 30px;
         }
 
-        .servico-item {
-            font-size: 1.2rem;
+        .titulo-subgrupo {
             color: var(--cor-branca);
-            padding: 15px 0;
-            border-bottom: 1px dashed var(--cor-cinza);
+            font-weight: 700;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            padding-left: 5px;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
-        
-        .servico-item:last-of-type {
-            border-bottom: none;
+
+        .servico-item {
+            position: relative;
+            cursor: pointer;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--cor-branca);
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .servico-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding-left: 25px;
+        }
+
+        .servico-item.selecionado {
+            background-color: rgba(255, 195, 0, 0.15);
+            border-color: rgba(212, 165, 9, 0.5);
+            color: var(--cor-secundaria);
+            transform: scale(1.02) translateX(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .contato-info {
@@ -77,37 +103,55 @@
         /* Área de Preços (à direita) */
         .precos-box {
             flex: 1;
-            background: var(--cor-cinza-escuro);
-            padding: 30px;
-            border-radius: 8px;
-            text-align: center;
-            border: 2px solid var(--cor-secundaria);
-            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .precos-box h2 {
+        .form-card {
+            background: var(--cor-cinza-escuro);
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .form-card.active-form {
+            border-color: var(--cor-secundaria);
+            box-shadow: 0 0 15px rgba(255, 195, 0, 0.15);
+        }
+
+        .form-card h2 {
             font-family: var(--fonte-principal);
             color: var(--cor-secundaria);
-            margin-bottom: 25px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            text-align: center;
         }
         
-        .precos-box p {
-            font-size: 1rem;
-            color: var(--cor-cinza);
+        .service-selected-display {
+            font-size: 0.95rem;
+            color: var(--cor-branca);
             margin-bottom: 15px;
+            font-style: italic;
+            min-height: 2.5em; /* Reserva espaço */
+            text-align: center;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 10px;
         }
 
-        .precos-box label {
+        .form-card label {
             display: block;
             text-align: left;
-            margin-top: 15px;
+            margin-top: 10px;
             margin-bottom: 5px;
             color: var(--cor-branca);
             font-weight: 500;
+            font-size: 0.9rem;
         }
 
-        .precos-box input[type="number"],
-        .precos-box input[type="text"] {
+        .form-card input[type="number"],
+        .form-card input[type="text"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #555;
@@ -115,15 +159,16 @@
             color: var(--cor-branca);
             border-radius: 4px;
             font-size: 1rem;
+            margin-bottom: 5px;
         }
 
         /* Responsividade */
-        @media (max-width: 850px) {
+        @media (max-width: 900px) {
             .negociacao-content {
                 flex-direction: column;
             }
             .precos-box {
-                order: -1;
+                order: -1; /* Coloca os forms acima ou abaixo conforme preferência (aqui: acima) */
             }
         }
     </style>
@@ -136,42 +181,65 @@
         </header>
         
         <div class="negociacao-content">
+            
             <div class="servicos-negociacao">
                 
                 <h3>Preço da reforma</h3>
-
                 <p class="titulo-subgrupo">Reforço Estrutural Tático:</p>
 
-                <div class="servico-item" data-preco="8000">Portão Grande Deslizante 6m x 2,50m (260-350kg)</div>
-
-                <div class="servico-item" data-preco="1100">Motor para o portão grande </div>
-
-                <div class="servico-item" data-preco="500">Cercas elétricas</div>
-                
-                <div class="servico-item" data-preco="900">Alarme com sensores infravermelhos de movimento com 5 unidades cada</div>
-
-                <div class="servico-item" data-preco="30">Luzes de emergência</div>
+                <div class="servico-item" data-categoria="reforma" data-preco="8000">Portão Grande Deslizante 6m x 2,50m</div>
+                <div class="servico-item" data-categoria="reforma" data-preco="1100">Motor para o portão grande</div>
+                <div class="servico-item" data-categoria="reforma" data-preco="500">Cercas elétricas (por metro)</div>
+                <div class="servico-item" data-categoria="reforma" data-preco="900">Alarme c/ sensores (Kit 5 unid.)</div>
+                <div class="servico-item" data-categoria="reforma" data-preco="30">Luzes de emergência</div>
                 
                 <h3>Automatização da empresa</h3>
-                <div class="servico-item" data-preco="200">Cameras a prova de água</div>
                 
-                <div class="servico-item" data-preco="7500">Catracas QR code</div>
-                
-                <div class="servico-item" data-preco="400">Leitura Biométrica Reconhecimento facial, digital e senha</div>
+                <div class="servico-item" data-categoria="automacao" data-preco="200">Câmeras à prova d'água</div>
+                <div class="servico-item" data-categoria="automacao" data-preco="7500">Catracas QR Code</div>
+                <div class="servico-item" data-categoria="automacao" data-preco="400">Leitura Biométrica (Facial/Digital)</div>
 
+                <div class="contato-info">
+                    <p>Deseja fazer uma negociação personalizada?</p>
+                    <p>
+                        📧 E-mail: nextguard@gmail.com<br>
+                        📞 Telefone: (14) 99695-0065
+                    </p>
+                </div>
             </div>
 
             <div class="precos-box">
-                <h2>Preços</h2>
-                <p id="texto-preco-base">Selecione um serviço ao lado para ver o preço.</p>
                 
-                <form onsubmit="event.preventDefault()">
-                    <label for="quantia">Área Necessitada (m):</label>
-                    <input type="number" id="quantia" placeholder="Ex: 50" min="0" step="any" required>
+                <div class="form-card" id="card-reforma">
+                    <h2>Orçamento de Reforma</h2>
+                    <div class="service-selected-display" id="display-reforma">
+                        Selecione um item de reforma ao lado.
+                    </div>
                     
-                    <label for="valor-estimado">Valor Estimado (R$):</label>
-                    <input type="text" id="valor-estimado" placeholder="Aguardando..." readonly>
-                </form>
+                    <form onsubmit="event.preventDefault()">
+                        <label for="qtd-reforma">Quantidade :</label>
+                        <input type="number" id="qtd-reforma" placeholder="0" min="0" step="any">
+                        
+                        <label for="total-reforma">Valor Estimado (R$):</label>
+                        <input type="text" id="total-reforma" placeholder="R$ 0,00" readonly>
+                    </form>
+                </div>
+
+                <div class="form-card" id="card-automacao">
+                    <h2>Orçamento de Automação</h2>
+                    <div class="service-selected-display" id="display-automacao">
+                        Selecione um item de automação ao lado.
+                    </div>
+                    
+                    <form onsubmit="event.preventDefault()">
+                        <label for="qtd-automacao">Quantidade de Unidades/Pontos:</label>
+                        <input type="number" id="qtd-automacao" placeholder="0" min="0" step="1">
+                        
+                        <label for="total-automacao">Valor Estimado (R$):</label>
+                        <input type="text" id="total-automacao" placeholder="R$ 0,00" readonly>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
@@ -179,54 +247,98 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const servicoItems = document.querySelectorAll('.servico-item');
-        const inputArea = document.getElementById('quantia');
-        const outputValor = document.getElementById('valor-estimado');
-        const textoPrecoBase = document.getElementById('texto-preco-base');
         
-        let precoAtual = 0; 
-        const unitSize = 5; 
+        // Variáveis para armazenar o estado atual de cada formulário
+        let state = {
+            reforma: { preco: 0, nome: '' },
+            automacao: { preco: 0, nome: '' }
+        };
 
-        function calculateEstimate() {
-            if (precoAtual === 0) {
-                outputValor.value = 'Selecione um serviço';
-                return;
+        // Elementos do DOM
+        const forms = {
+            reforma: {
+                card: document.getElementById('card-reforma'),
+                display: document.getElementById('display-reforma'),
+                input: document.getElementById('qtd-reforma'),
+                output: document.getElementById('total-reforma')
+            },
+            automacao: {
+                card: document.getElementById('card-automacao'),
+                display: document.getElementById('display-automacao'),
+                input: document.getElementById('qtd-automacao'),
+                output: document.getElementById('total-automacao')
             }
+        };
 
-            const area = parseFloat(inputArea.value.replace(',', '.'));
+        // Função de cálculo
+        function calcular(categoria) {
+            const s = state[categoria];
+            const f = forms[categoria];
             
-            if (isNaN(area) || area <= 0) {
-                outputValor.value = 'Insira uma área válida';
+            if (s.preco === 0) {
+                f.output.value = 'Selecione um serviço';
                 return;
             }
 
-            const estimatedValue = (area / unitSize) * precoAtual;
-            outputValor.value = 'R$ ' + estimatedValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const qtd = parseFloat(f.input.value.replace(',', '.'));
+            
+            if (isNaN(qtd) || qtd < 0) {
+                f.output.value = 'Qtd. inválida';
+                return;
+            }
+
+            // Cálculo direto: Quantidade * Preço Unitário
+            const total = qtd * s.preco;
+            
+            f.output.value = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         }
 
+        // Event Listeners para os inputs
+        forms.reforma.input.addEventListener('input', () => calcular('reforma'));
+        forms.automacao.input.addEventListener('input', () => calcular('automacao'));
+
+        // Event Listeners para os cliques nos serviços
         servicoItems.forEach(item => {
             item.addEventListener('click', function() {
-                // Remove a seleção visual de todos
-                servicoItems.forEach(i => i.classList.remove('selecionado'));
-                
-                // Adiciona a classe que ativa a animação e a cor suave no item clicado
+                const categoria = this.getAttribute('data-categoria'); // 'reforma' ou 'automacao'
+                const preco = parseFloat(this.getAttribute('data-preco'));
+                const nome = this.textContent;
+
+                // Remove seleção visual apenas dos itens da MESMA categoria
+                // (opcional: se quiser permitir apenas um item global selecionado, remova de todos)
+                document.querySelectorAll(`.servico-item[data-categoria="${categoria}"]`).forEach(i => {
+                    i.classList.remove('selecionado');
+                });
+
+                // Adiciona seleção visual
                 this.classList.add('selecionado');
-                
-                // Lógica de preço
-                precoAtual = parseFloat(this.getAttribute('data-preco'));
-                
-                // Atualiza o texto informativo com uma animação simples de opacidade
-                textoPrecoBase.style.opacity = '0';
+
+                // Atualiza o estado
+                state[categoria].preco = preco;
+                state[categoria].nome = nome;
+
+                // Atualiza o texto do formulário correspondente
+                const displayEl = forms[categoria].display;
+                displayEl.style.opacity = '0';
                 setTimeout(() => {
-                    textoPrecoBase.innerHTML = `Serviço: <strong style="color: var(--cor-secundaria)">${this.textContent}</strong><br>Base: R$ ${precoAtual},00 a cada metro`;
-                    textoPrecoBase.style.opacity = '1';
+                    displayEl.innerHTML = `Item: <strong>${nome}</strong><br>Unitário: ${preco.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`;
+                    displayEl.style.opacity = '1';
                 }, 200);
 
-                calculateEstimate();
+                // Destaca visualmente o formulário ativo
+                if(categoria === 'reforma') {
+                    forms.reforma.card.classList.add('active-form');
+                    forms.automacao.card.classList.remove('active-form');
+                } else {
+                    forms.automacao.card.classList.add('active-form');
+                    forms.reforma.card.classList.remove('active-form');
+                }
+
+                // Recalcula se já houver valor no input
+                calcular(categoria);
             });
         });
-
-        inputArea.addEventListener('input', calculateEstimate);
     });
-</script>
+    </script>
 </body>
 </html>
