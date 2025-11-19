@@ -137,68 +137,96 @@
         
         <div class="negociacao-content">
             <div class="servicos-negociacao">
-                <h2>Nossos Serviços</h2>
                 
                 <h3>Preço da reforma</h3>
-                <div class="servico-item">Reforço Estrutural Tático (Muros, Portões, etc.)</div>
-                <div class="servico-item">Iluminação Tática de Segurança</div>
+
+                <p class="titulo-subgrupo">Reforço Estrutural Tático:</p>
+
+                <div class="servico-item" data-preco="8000">Portão Grande Deslizante 6m x 2,50m (260-350kg)</div>
+
+                <div class="servico-item" data-preco="1100">Motor para o portão grande </div>
+
+                <div class="servico-item" data-preco="500">Cercas elétricas</div>
+                
+                <div class="servico-item" data-preco="900">Alarme com sensores infravermelhos de movimento com 5 unidades cada</div>
+
+                <div class="servico-item" data-preco="30">Luzes de emergência</div>
                 
                 <h3>Automatização da empresa</h3>
-                <div class="servico-item">Instalação de Câmeras e Alarmes</div>
-                <div class="servico-item">Controle de Acesso Eletrônico (Biometria, Catracas)</div>
-                <div class="servico-item">Monitoramento Remoto 24/7</div>
+                <div class="servico-item" data-preco="200">Cameras a prova de água</div>
+                
+                <div class="servico-item" data-preco="7500">Catracas QR code</div>
+                
+                <div class="servico-item" data-preco="400">Leitura Biométrica Reconhecimento facial, digital e senha</div>
 
-                <div class="contato-info">
-                    <p>Deseja fazer uma negociação à parte? Entre em contato conosco:</p>
-                    <p>
-                        📧 E-mail: <a href="mailto:nextguard@gmail.com" style="color: var(--cor-secundaria);">nextguard@gmail.com</a><br>
-                        📞 Telefone: (14) 99695-0065 (WhatsApp)
-                    </p>
-                </div>
             </div>
 
             <div class="precos-box">
                 <h2>Preços</h2>
-                <p>Valor por 5m²: R$ 100,00 (para o serviço base de reforma)</p>
+                <p id="texto-preco-base">Selecione um serviço ao lado para ver o preço.</p>
                 
                 <form onsubmit="event.preventDefault()">
-                    <label for="quantia">Área Necessitada (m²):</label>
+                    <label for="quantia">Área Necessitada (m):</label>
                     <input type="number" id="quantia" placeholder="Ex: 50" min="0" step="any" required>
                     
                     <label for="valor-estimado">Valor Estimado (R$):</label>
-                    <input type="text" id="valor-estimado" placeholder="Aguardando área..." readonly>
-                    
+                    <input type="text" id="valor-estimado" placeholder="Aguardando..." readonly>
                 </form>
             </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputArea = document.getElementById('quantia');
-            const outputValor = document.getElementById('valor-estimado');
-            const pricePerUnit = 100; // R$ 100,00
-            const unitSize = 5;      // 5 m²
+    document.addEventListener('DOMContentLoaded', function() {
+        const servicoItems = document.querySelectorAll('.servico-item');
+        const inputArea = document.getElementById('quantia');
+        const outputValor = document.getElementById('valor-estimado');
+        const textoPrecoBase = document.getElementById('texto-preco-base');
+        
+        let precoAtual = 0; 
+        const unitSize = 5; 
 
-            function calculateEstimate() {
-                // Obtém o valor e tenta convertê-lo para um número decimal
-                const area = parseFloat(inputArea.value.replace(',', '.'));
-                
-                if (isNaN(area) || area <= 0) {
-                    outputValor.value = 'Insira uma área válida (> 0)';
-                    return;
-                }
-
-                // Fórmula: (Area / 5) * 100
-                const estimatedValue = (area / unitSize) * pricePerUnit;
-                
-                // Formata o valor para moeda brasileira (R$ com 2 casas decimais)
-                outputValor.value = 'R$ ' + estimatedValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        function calculateEstimate() {
+            if (precoAtual === 0) {
+                outputValor.value = 'Selecione um serviço';
+                return;
             }
 
-            // Adiciona o listener para calcular a cada alteração no campo de área
-            inputArea.addEventListener('input', calculateEstimate);
+            const area = parseFloat(inputArea.value.replace(',', '.'));
+            
+            if (isNaN(area) || area <= 0) {
+                outputValor.value = 'Insira uma área válida';
+                return;
+            }
+
+            const estimatedValue = (area / unitSize) * precoAtual;
+            outputValor.value = 'R$ ' + estimatedValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        servicoItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove a seleção visual de todos
+                servicoItems.forEach(i => i.classList.remove('selecionado'));
+                
+                // Adiciona a classe que ativa a animação e a cor suave no item clicado
+                this.classList.add('selecionado');
+                
+                // Lógica de preço
+                precoAtual = parseFloat(this.getAttribute('data-preco'));
+                
+                // Atualiza o texto informativo com uma animação simples de opacidade
+                textoPrecoBase.style.opacity = '0';
+                setTimeout(() => {
+                    textoPrecoBase.innerHTML = `Serviço: <strong style="color: var(--cor-secundaria)">${this.textContent}</strong><br>Base: R$ ${precoAtual},00 a cada metro`;
+                    textoPrecoBase.style.opacity = '1';
+                }, 200);
+
+                calculateEstimate();
+            });
         });
-    </script>
+
+        inputArea.addEventListener('input', calculateEstimate);
+    });
+</script>
 </body>
 </html>

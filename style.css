@@ -614,3 +614,75 @@ header nav a:hover {
         font-size: 1.2rem;
     }
 }
+
+/* --- Estilos para os Itens de Serviço (Negociação) --- */
+
+/* --- Estilos para os Itens de Serviço (Negociação) --- */
+
+.servico-item {
+    position: relative;
+    cursor: pointer;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-weight: 500;
+}
+
+/* Efeito ao passar o mouse */
+.servico-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding-left: 25px; /* Mantém o movimento suave */
+}
+
+/* Efeito de Clique */
+.servico-item:active {
+    transform: scale(0.98);
+}
+
+
+.servico-item.selecionado {
+    /* Fundo suave translúcido */
+    background-color: rgba(255, 195, 0, 0.15);
+    
+    /* Borda fina ao redor de todo o item */
+    border-color: rgba(212, 165, 9, 0.5);
+    
+    /* Texto muda para amarelo */
+    color: var(--cor-secundaria);
+    
+    /* Animação de destaque */
+    transform: scale(1.02) translateX(10px);
+    
+    /* Sombra para profundidade */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Estilos para Subtópicos (Novos) --- */
+
+.titulo-subgrupo {
+    color: var(--cor-branca); /* Cor do texto normal */
+    font-weight: 700;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    padding-left: 5px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Classe extra para itens que são filhos/subtópicos */
+.sub-item {
+    margin-left: 30px; /* Empurra para a direita (identação) */
+    width: calc(100% - 30px); /* Ajusta a largura para não estourar */
+    font-size: 0.95rem; /* Levemente menor para hierarquia visual */
+    
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Ajuste fino para quando o sub-item for selecionado */
+.sub-item.selecionado {
+    border-left: 2px solid var(--cor-secundaria); /* A linha guia fica amarela */
+    transform: scale(1.02) translateX(5px); /* Movimento levemente menor */
+}
